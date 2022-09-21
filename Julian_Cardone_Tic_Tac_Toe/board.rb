@@ -2,12 +2,12 @@ require 'byebug'
 
 class Board
 
-    def initialize
-        @grid = Array.new(3) {Array.new(3, '_')}
+    def initialize(n)
+        @grid = Array.new(n) {Array.new(n, '_')}
     end
 
     def valid?(pos)
-        return true if (pos[0] <= 2 && pos[1] <=2) && (pos[0] >= 0 && pos[1] >= 0)
+        return true if (pos[0] <= @grid.length - 1 && pos[1] <= @grid.length - 1) && (pos[0] >= 0 && pos[1] >= 0)
         false
     end
 
@@ -31,12 +31,12 @@ class Board
     end
 
     def win_row?(mark)
-        @grid.each {|arr| return true if arr.count(mark) == 3}
+        @grid.each {|arr| return true if arr.count(mark) == @grid.length}
         false
     end
 
     def win_col?(mark)
-        @grid.transpose.each {|arr| return true if arr.count(mark) == 3}
+        @grid.transpose.each {|arr| return true if arr.count(mark) == @grid.length}
         false
     end
 
@@ -57,7 +57,7 @@ class Board
                 end
             end
         end
-        return true if count == 3 || count2 == 3
+        return true if count == @grid.length || count2 == @grid.length
         false
     end
 
