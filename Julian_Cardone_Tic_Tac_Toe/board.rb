@@ -49,17 +49,28 @@ class Board
                 end
             end
         end
-        return true if count == 3
         count2 = 0
         @grid.each_with_index do |arr, i|
             arr.reverse.each_with_index do |ele, j|
-                if i == j && @grid[i][j] == mark
+                if i == j && arr.reverse[j] == mark
                     count2 += 1
                 end
             end
         end
-        return true if count == 3 || count2 = 3
+        return true if count == 3 || count2 == 3
         false
+    end
+
+    def win?(mark)
+        status = true
+        status = false if !self.win_row?(mark)
+        status = false if !self.win_col?(mark)
+        status = false if !self.win_diagonal?(mark)
+        status
+    end
+
+    def empty_positions?
+        @grid.any? {|arr| arr.include?("_")}
     end
 
 end
