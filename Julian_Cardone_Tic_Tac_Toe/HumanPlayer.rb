@@ -21,7 +21,4 @@ class HumanPlayer
         return [row, col]
     end
 
-
-
-
 end
