@@ -62,11 +62,10 @@ class Board
     end
 
     def win?(mark)
-        status = true
-        status = false if !self.win_row?(mark)
-        status = false if !self.win_col?(mark)
-        status = false if !self.win_diagonal?(mark)
-        status
+        if self.win_row?(mark) || self.win_col?(mark) || self.win_diagonal?(mark)
+        return true
+        end
+        false
     end
 
     def empty_positions?
