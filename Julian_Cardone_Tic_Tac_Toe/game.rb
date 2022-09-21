@@ -4,19 +4,15 @@ require 'byebug'
 
 class Game
 
-    def initialize(n, mark_value1, mark_value2)
-        @player_one = HumanPlayer.new(mark_value1)
-        @player_two = HumanPlayer.new(mark_value2)
-        @current_player = @player_one
+    def initialize(n, *mark_values)
+        @players = []
+        mark_values.each {|mark| @players << HumanPlayer.new(mark)}
+        @current_player = @players[0]
         @grid = Board.new(n)
     end
 
     def switch_turn
-        if @current_player == @player_one
-            @current_player = @player_two
-        else
-            @current_player = @player_one
-        end
+        @current_player = @players.rotate![0]
     end
 
     def play
