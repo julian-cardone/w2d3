@@ -4,9 +4,10 @@ class ComputerPlayer
         @mark = mark_value
     end
 
+    attr_reader :mark
+
     def get_position(legal_positions)
         puts "Computer mark is: #{self.mark}"
-        end
 
         pos = legal_positions.shuffle[0]
         puts "Computer chose #{pos}"
